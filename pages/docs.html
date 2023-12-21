@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimSimi Docs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism-vsc-dark-plus.min.css" integrity="sha256-vjq35c8sJYTETD50R7M5eT+VeXq+lW8V2LBuo4+HSzo=" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" integrity="sha256-4Y6UwnSR5A6N1EDbNRAQAtYwaFDADx/yUsZxnwi2EM4=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-javascript.min.js" integrity="sha256-rjHJxum7LmQM2LO9M4g41glsGpWCPNMdt8t6IReBRWQ=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: url('https://source.unsplash.com/1920x1080/?nature') center center fixed;
+            background-size: cover;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        h2 {
+            text-align: center;
+            color: #000000;
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff;
+        }
+        p {
+            text-align: center;
+            color: #000000;
+        }
+
+        .dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            z-index: 1;
+            border-radius: 10px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .menu-button {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: inherit;
+            cursor: pointer;
+            color: #007BFF;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input,
+        select,
+        button {
+            margin-bottom: 15px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        textarea {
+            width: 100%;
+            height: 80px;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+        #autoNavigateBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .docs-content {
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            color: #ffffff;
+        }
+
+        .code {
+            background-color: #1e1e1e; 
+            color: #abb2bf; 
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .code pre {
+            color: #15FF00; 
+        }
+
+        .messenger-docs {
+            background-color: #1e1e1e; 
+            color: #abb2bf; 
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        .messenger-docs pre {
+            color: #15FF00; 
+        }
+    </style>
+</head>
+<body>
+    <div class="dropdown">
+        <span class="menu-button" onclick="toggleDropdown()">Menu &#9662;</span>
+        <div class="dropdown-content" id="menuContent">
+            <ul class="menu-list">
+                <li class="menu-list-item"><button class="menu-button" onclick="navigate('/')">Home</button></li>
+                <li class="menu-list-item"><button class="menu-button" onclick="navigate('/leaderboard')">Leaderboard</button></li>
+                <li class="menu-list-item"><button class="menu-button" onclick="navigate('/docs')">Docs</button></li>
+                <li class="menu-list-item"><button class="menu-button" onclick="navigate('/info')">Info</button></li>
+            </ul>
+        </div>
+    </div>
+    <h1>SimSimi Docs</h1>
+
+    <div class="docs-content">
+        <h2>Description</h2>
+        <p>The Simsimi-Sqlite package is a Node.js library that allows you to interact with the SimSimi API for chat and teaching functionalities. It provides convenient methods for making HTTP requests to the SimSimi API and processing the responses.</p>
+
+        <h2>Installation</h2>
+        <p>To use the Simsimi-Sqlite package, you can install it using npm:</p>
+
+        <div class="code">
+            <pre>npm install simsimi-sqlite</pre>
+        </div>
+
+                <h2>MESSENGER × BOT</h2>
+        <p>If you want, I can get you docs for the bot code MessengerDocs</p>
+        <button class="menu-button" onclick="window.location.href='/fbdocs'">MessengerDocs</button>
+
+        <h2>Chat</h2>
+        <div class="code language-javascript">
+            <pre>const { chat } = require('simsimi-sqlite');
+
+(async () => {
+  try {
+    const chatResponse = await chat("How are you?", "your-access-token");
+    console.log("Chat Response:", chatResponse);
+  } catch (error) {
+    console.error(error);
+  }
+})();</pre>
+        </div>
+
+        <h2>Teach</h2>
+        <div class="code language-javascript">
+            <pre>const { teach } = require('simsimi-sqlite');
+
+(async () => {
+  try {
+    const teachResponse = await teach({
+      question: "How are you?",
+      answer: "I'm fine",
+      token: "your-access-token"
+    });
+    console.log("Teach Response:", teachResponse);
+  } catch (error) {
+    console.error(error);
+  }
+})();</pre>
+        </div>
+
+
+    </div>
+
+    <script>
+      function toggleDropdown() {
+          const dropdownContent = document.getElementById('menuContent');
+          dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+      }
+
+      function navigate(path) {
+          window.location.href = path;
+      }
+    </script>
+</body>
+</html>

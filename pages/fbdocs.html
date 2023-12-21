@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimSimi Docs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism-vsc-dark-plus.min.css" integrity="sha256-vjq35c8sJYTETD50R7M5eT+VeXq+lW8V2LBuo4+HSzo=" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" integrity="sha256-4Y6UwnSR5A6N1EDbNRAQAtYwaFDADx/yUsZxnwi2EM4=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-javascript.min.js" integrity="sha256-rjHJxum7LmQM2LO9M4g41glsGpWCPNMdt8t6IReBRWQ=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: url('https://source.unsplash.com/1920x1080/?nature') center center fixed;
+            background-size: cover;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        h2 {
+            text-align: center;
+            color: #000000;
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff;
+        }
+        p {
+            text-align: center;
+            color: #000000;
+        }
+
+        .dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            z-index: 1;
+            border-radius: 10px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .menu-button {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: inherit;
+            cursor: pointer;
+            color: #007BFF;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input,
+        select,
+        button {
+            margin-bottom: 15px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        textarea {
+            width: 100%;
+            height: 80px;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+        #autoNavigateBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .docs-content {
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            color: #ffffff;
+        }
+
+        .code {
+            background-color: #1e1e1e; 
+            color: #abb2bf; 
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .code pre {
+            color: #15FF00; 
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="dropdown">
+        <span class="menu-button" onclick="toggleDropdown()">Menu &#9662;</span>
+        <div class="dropdown-content" id="menuContent">
+            <ul class="menu-list">
+                <li class="menu-list-item"><button class="menu-button" onclick="navigate('/')">Home</button></li>
+                <li class="menu-list-item"><button class="menu-button" onclick="navigate('/leaderboard')">Leaderboard</button></li>
+                <li class="menu-list-item"><button class="menu-button" onclick="navigate('/docs')">Docs</button></li>
+                <li class="menu-list-item"><button class="menu-button" onclick="navigate('/info')">Info</button></li>
+            </ul>
+        </div>
+    </div>
+    <h1>SimSimi Docs</h1>
+
+    <p>Before you start, make sure to install the necessary npm package for SimSimi-Sqlite. Open your terminal/shell and run the following command:</p>
+
+    <div class="code">
+        <pre>npm install simsimi-sqlite</pre>
+    </div>
+
+
+    <h2>MIRAI/BOTPACK</h2>
+        <h2>Chat</h2>
+    <div class="code">
+        <pre>
+module.exports.config = {
+    name: "sim",
+    version: "1.0.0",
+    hasPermission: 0,
+    credits: "Choru Official",
+    description: "Talk to Sim",
+    usages: "[text]",
+    commandCategory: "...",
+    cooldowns: 5
+};
+
+module.exports.run = async ({ api, event, args }) => {
+    const { chat } = require('simsimi-sqlite');
+
+    const userInput = args.join(" ");
+
+    try {
+        const chatResponse = await chat(userInput, "your-access-token");
+        const answer = chatResponse.result;
+
+        api.sendMessage(answer, event.threadID, event.messageID);
+    } catch (error) {
+        console.error(error);
+    }
+};
+</pre>
+    </div>
+                    <h2>TEACH</h2>
+    <div class="code">
+        <pre>
+
+module.exports.config = {
+    name: "teach",
+    version: "1.0.0",
+    hasPermission: 0,
+    credits: "Choru Official",
+    description: "Teach SimSimi",
+    usages: "[hi => hello]",
+    commandCategory: "...",
+    cooldowns: 5
+};
+
+module.exports.run = async ({ api, event, args }) => {
+    const { teach } = require('simsimi-sqlite');
+    let text = args.join(" ");
+    const text1 = text.substr(0, text.indexOf(' => '));
+    const length = parseInt(text1.length);
+    const text2 = text.split(" => ").pop();
+    const length_2 = parseInt(text2.length);
+
+    try {
+        const teachResponse = await teach({
+            question: text1,
+            answer: text2,
+            token: "your-access-token"
+        });
+
+        api.sendMessage(`Your ask: ${teachResponse.asking}\nSim respond: ${teachResponse.answer}`, event.threadID, event.messageID);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
+        </pre>
+    </div>
+
+
+        <h2>GOATBOT</h2>
+        <h2>Chat</h2>
+    <div class="code">
+        <pre>
+module.exports = {
+  config: {
+    name: "SimSimiChat",
+    version: "1.0.0",
+    author: "Choru Offcial",
+    countDown: 5,
+    role: 0,
+    shortDescription: {
+      vi: "Mô tả ngắn tiếng Việt",
+      en: "Short description in English"
+    },
+    longDescription: {
+      uid: "User ID",
+      en: "Long description in English"
+    },
+    category: "Chat",
+    guide: {
+      vi: "Hướng dẫn sử dụng tiếng Việt",
+      en: "Usage guide in English"
+    }
+  },
+
+  langs: {
+    vi: {
+      syntaxError: "Lỗi cú pháp"
+    },
+    en: {
+      syntaxError: "Syntax error"
+    }
+  },
+
+  onStart: async function ({ message, args, getLang }) {
+    const { chat } = require('simsimi-sqlite');
+
+    if (!args[0]) {
+      const lang = getLang();
+      return message.reply(lang.syntaxError);
+    }
+
+    try {
+      const chatResponse = await chat(args.join(" "), "your-access-token");
+      message.reply(`${chatResponse.result}`);
+    } catch (error) {
+      console.error(error);
+      message.reply("An error occurred during the chat.");
+    }
+  }
+};
+
+</pre>
+    </div>
+                    <h2>TEACH</h2>
+    <div class="code">
+        <pre>
+
+module.exports = {
+    config: {
+        name: "teach-simsimi",
+        version: "1.0.0",
+        author: "Choru Official",
+        countDown: 5,
+        role: 0,
+        shortDescription: {
+            vi: "Dạy SimSimi",
+            en: "Teach SimSimi"
+        },
+        longDescription: {
+            uid: "",
+            en: "Teach SimSimi a question and answer pair."
+        },
+        category: "fun", // Adjust the category as needed
+        guide: {
+            vi: "Dùng lệnh [text] để dạy SimSimi.",
+            en: "Use the [text] command to teach SimSimi."
+        }
+    },
+
+    langs: {
+        vi: {
+            syntaxError: "Bạn cần cung cấp cả câu hỏi và câu trả lời để dạy SimSimi."
+        },
+        en: {
+            syntaxError: "You need to provide both a question and an answer to teach SimSimi."
+        }
+    },
+
+    onStart: async function ({ message, event, args, getLang }) {
+        if (args.length < 3 || !args.includes('=>')) {
+            const lang = getLang();
+            return message.reply(lang.syntaxError);
+        }
+
+        const text1 = args.slice(0, args.indexOf('=>')).join(" ");
+        const text2 = args.slice(args.indexOf('=>') + 1).join(" ");
+
+
+        const { teach } = require('simsimi-sqlite');
+
+        try {
+            const teachResponse = await teach({
+                question: text1,
+                answer: text2,
+                token: "your-access-token"
+            });
+
+
+            return message.reply(`Teach Response: ${teachResponse.asking}, ${teachResponse.answer}`);
+        } catch (error) {
+            console.error(error);
+
+
+            return message.reply('An error occurred while processing the teach request.');
+        }
+    }
+};
+
+        </pre>
+    </div>
+
+    <script>
+      function toggleDropdown() {
+          const dropdownContent = document.getElementById('menuContent');
+          dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+      }
+
+      function navigate(path) {
+          window.location.href = path;
+      }
+    </script>
+</body>
+</html>
